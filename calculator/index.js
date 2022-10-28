@@ -27,27 +27,24 @@ function clearAll() {
 }
 
 function deleteOneSign() {
-    strToShowOnScreenBeforeCount = strToShowOnScreenBeforeCount.slice(0, strToShowOnScreenBeforeCount.length - 1);
-    resultWindow.innerHTML = strToShowOnScreenBeforeCount
+    resultWindow.innerHTML =  resultWindow.innerHTML.slice(0,-1)
 }
+function checkIfPointCanBePut(str) {
+    return !(str.includes(".") || !str.length || (/^\D/.test(str) && str.length === 1));
+
+}
+
+console.log(checkIfPointCanBePut('-1'));
 
 function showHistory() {
     historyDisplay.innerHTML = strToShowOnScreenBeforeCount
 }
-
-buttonsContainer.addEventListener('click', function (e) {
-
+function clickHandler(e){
     if (e.target.classList.contains('dot')) {
-        if( !resultWindow.innerHTML.includes(".") && resultWindow.innerHTML.length ){
-            resultWindow.innerHTML = resultWindow.innerHTML + "."
-            console.log("dot")
-        } else {
-            console.log("nodot")
-
+        if (!checkIfPointCanBePut(resultWindow.innerHTML)) {
+            return
         }
-    } else if (e.target.classList.contains('number')) {
-        console.log("num")
-
+    } if (e.target.classList.contains('number')) {
         if (sign) {
             secondNumber = secondNumber + e.target.innerHTML
             console.log(secondNumber)
@@ -98,6 +95,10 @@ buttonsContainer.addEventListener('click', function (e) {
     if (e.target.classList.contains('delete')) {
         deleteOneSign()
     }
+}
+buttonsContainer.addEventListener('click', function (e) {
+
+    clickHandler(e)
 })
 
 

@@ -12,8 +12,8 @@ function count(a, b) {
     if (sign === "+") return +a + +b
     if (sign === "*") return a * b
     if (sign === "/") return a / b
-    if (sign === "^") return Math.pow(a,b)
-    if(sign === "%") return a / 100 * b
+    if (sign === "^") return Math.pow(a, b)
+    if (sign === "%") return a / 100 * b
 
 
     return 0
@@ -27,24 +27,26 @@ function clearAll() {
 }
 
 function deleteOneSign() {
-    resultWindow.innerHTML =  resultWindow.innerHTML.slice(0,-1)
+    resultWindow.innerHTML = resultWindow.innerHTML.slice(0, -1)
 }
+
 function checkIfPointCanBePut(str) {
     return !(str.includes(".") || !str.length || (/^\D/.test(str) && str.length === 1));
 
 }
 
-console.log(checkIfPointCanBePut('-1'));
 
-function showHistory() {
-    historyDisplay.innerHTML = strToShowOnScreenBeforeCount
-}
-function clickHandler(e){
+
+function clickHandler(e) {
     if (e.target.classList.contains('dot')) {
         if (!checkIfPointCanBePut(resultWindow.innerHTML)) {
             return
         }
-    } if (e.target.classList.contains('number')) {
+    }
+    if(e.target.innerHTML === '0'){
+        if(resultWindow.innerHTML === "0") return;
+    }
+    if (e.target.classList.contains('number')) {
         if (sign) {
             secondNumber = secondNumber + e.target.innerHTML
             console.log(secondNumber)
@@ -96,6 +98,7 @@ function clickHandler(e){
         deleteOneSign()
     }
 }
+
 buttonsContainer.addEventListener('click', function (e) {
 
     clickHandler(e)

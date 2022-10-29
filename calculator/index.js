@@ -22,7 +22,7 @@ function count(a, b) {
 function clearAll() {
     firstNumber = ''
     secondNumber = ""
-    historyDisplay = ""
+    historyDisplay.innerHTML = ""
     resultWindow.innerHTML = '';
 }
 

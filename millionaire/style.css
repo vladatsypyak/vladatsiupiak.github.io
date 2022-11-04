@@ -1,0 +1,165 @@
+body {
+    padding: 0;
+    margin: 0;
+    background: url("https://mobimg.b-cdn.net/v3/fetch/fc/fc813e57424d1ad9576f9066812f670f.jpeg") no-repeat center center fixed;
+}
+
+* {
+    box-sizing: border-box;
+}
+.container {
+    display: flex;
+}
+.pop_up {
+    width: 90%;
+    margin: 0 auto;
+    height: 300px;
+    position: absolute;
+    top: 80px;
+    left: 5%;
+    border-radius: 25px;
+    border: 2px solid gold;
+    background-color: rgba(0, 0, 0, 0.53);
+    padding: 30px;
+}
+.pop_up_title{
+    font-size: 30px;
+    color: gold;
+}
+.pop_up_text{
+    text-align: center;
+    font-size: 24px;
+    color: white;
+}
+
+.game_section {
+    position: relative;
+    height: 100vh;
+    padding-top: 50px;
+    width: 70%;
+    border-right: 1px solid white;
+
+}
+
+.qa_wrap {
+    margin-top: 400px;
+    bottom: 80px;
+    padding: 20px;
+}
+
+.question {
+    width: 100%;
+    border-radius: 40px;
+    background-color: black;
+    padding: 20px;
+    color: gold;
+    margin-bottom: 20px;
+}
+
+.options_wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.option {
+    width: 45%;
+    border-radius: 40px;
+    background-color: black;
+    padding: 20px;
+    color: gold;
+
+}
+.option:hover{
+    opacity: 0.8;
+    cursor: pointer;
+    outline: 1px gold solid;
+    box-sizing: border-box;
+}
+ol{
+    display: flex;
+    flex-direction: column-reverse;
+}
+.points_section{
+    padding-left: 30px;
+    padding-top: 50px;
+    width: 30%;
+}
+.point{
+    color: white;
+    font-size: 28px;
+}
+.save  {
+    color: gold;
+}
+.help_wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.help_item{
+    border: 1px solid gold;
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    text-align: center;
+    line-height: 80px;
+    background-color: black;
+    color: white;
+}
+.phone{
+    background-color: #c3a42a;
+}
+.phone img{
+    position: relative;
+    top: 10px;
+    width: 55px;
+    height: auto;
+}
+.help_item:hover{
+    scale: 1.1;
+}
+.round{
+    border: 1px solid gold;
+    background-color: gold;
+    width: fit-content;
+    border-radius: 15px;
+    padding: 8px 3%;
+    color: black;
+    font-weight: bold;
+    position: relative;
+    text-decoration: underline;
+}
+
+.round:before{
+    content: "";
+    position:absolute;
+    top: -1px;
+    left:-58%;
+    background-color: gold;
+    z-index:-1;
+    display:block;
+    width:100%;
+    height:50px;
+    border-radius:15px;
+}
+.correct{
+    background-color: #0c430c;
+}
+.clue{
+    background-color: #c1c132;
+    color: black;
+}
+.used{
+    background-color: grey;
+}
+.used:hover{
+    scale: 1;
+}
+.million{
+    font-size: 48px;
+    font-weight: bold;
+    color: gold;
+}

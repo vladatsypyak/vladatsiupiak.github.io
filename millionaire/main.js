@@ -8,12 +8,9 @@ let phoneHelp = document.querySelector(".phone")
 let fiftyHelp = document.querySelector(".fifty")
 let fiftyHelpAvailable = true
 let phoneHelpAvailable = true
+let prize = 0
 let roundNum = 1
 let gameOver = false
-
-
-console.log(prizes[0].innerHTML)
-
 let roundInfo = [
     {
         question: "Найменша країна світу",
@@ -82,7 +79,7 @@ let roundInfo = [
         correct: "Сімокава Декотена",
         indexOfCorrect: 1
 
-    },{
+    }, {
         question: "Найменша країна світу",
         options: ["Ватикан", "Люксембург", "ЄВізантія", "Італія"],
         correct: "Ватикан",
@@ -121,7 +118,7 @@ let roundInfo = [
 
 function handleFiftyHelpClick(roundNum) {
 
-    if(fiftyHelpAvailable){
+    if (fiftyHelpAvailable) {
         let correct = optionsContainers[roundInfo[roundNum - 1].indexOfCorrect]
         let notCorrectOptions = [0, 1, 2, 3].filter((el) => el !== roundInfo[roundNum - 1].indexOfCorrect)
         let randomIndex = Math.floor(Math.random() * 3)
@@ -132,76 +129,62 @@ function handleFiftyHelpClick(roundNum) {
 
             }
         })
-        setPopUpTitleAndText(`Підказка "50/50"`,"Виберіть правильну відповідь")
+        setPopUpTitleAndText(`Підказка "50/50"`, "Виберіть правильну відповідь")
         fiftyHelpAvailable = false
         fiftyHelp.classList.add("used")
 
     }
 }
 
-function startGame() {
-    let prize = 0
-    putQuestion(roundNum - 1)
 
-    function round(userAnswer) {
-        console.log(gameOver)
-          let answer
-          if (userAnswer) {
-              answer = userAnswer.innerHTML
-          }
-          putQuestion(roundNum - 1)
-          let quiz = roundInfo[roundNum - 1]
-          if (roundNum === 5 || roundNum === 10 ) {
-              prize = prizes[roundNum - 1].innerHTML
-          }
-          if (answer === quiz.correct) {
-              setPopUpTitleAndText(`Раунд ${roundNum +1}`, "Відповідь правильна")
-              userAnswer.classList.add('correct')
-              if (roundNum === 15) {
-                  prize = '1 000 000'
-                  setPopUpTitleAndText('',`Це був останній раунд. <p> Вітаємо ви виграли <span class="million">${prize}</span> грн!!!</p>
-                 `)
-              } else {
-                  roundNum += 1
-                  definePrizeOnBoard(roundNum - 1)
-                  setTimeout(() => {
-                      userAnswer.classList.remove('correct')
-                      putQuestion(roundNum - 1)
-                  }, 1000)
-              }
-          } else {
-              popUpText.innerHTML = `На жаль ви програли, Ваш виграш становить ${prize}грн`
-              gameOver = true
+function round(userAnswer) {
+    console.log(gameOver)
+    if(!gameOver){
+        let answer
+        putQuestion(roundNum - 1)
 
-          }
-      }
-
-
-
-
-
-    optionsContainer.addEventListener("click", (e) => {
-            round(e.target)
+        if (userAnswer) {
+            answer = userAnswer.innerHTML
         }
-    )
-    phoneHelp.addEventListener("click", (e) => {
-        handlePhoneHelpClick();
+        let quiz = roundInfo[roundNum - 1]
+        if (roundNum === 5)  prize = 1000
 
-    })
-    fiftyHelp.addEventListener("click", () => {
-        handleFiftyHelpClick(roundNum);
-    })
+        if (roundNum === 10)  prize = 32000
+
+        if (answer === quiz.correct) {
+            setPopUpTitleAndText(`Раунд ${roundNum + 1}`, "Відповідь правильна")
+            userAnswer.classList.add('correct')
+            if (roundNum === 15) {
+                prize = '1 000 000'
+                gameOver = true
+                setPopUpTitleAndText('', `Це був останній раунд. <p> Вітаємо ви виграли <span class="million">${prize}</span> грн!!!</p>
+                 `)
+            } else {
+                roundNum += 1
+                definePrizeOnBoard(roundNum - 1)
+                setTimeout(() => {
+                    userAnswer.classList.remove('correct')
+                    putQuestion(roundNum - 1)
+                }, 1000)
+            }
+        } else {
+            userAnswer.classList.add('wrong')
+            popUpText.innerHTML = `На жаль ви програли, Ваш виграш становить ${prize}грн`
+            gameOver = true
+
+        }
+    }
 }
 
 
-startGame()
+
 
 function handlePhoneHelpClick() {
-    if(phoneHelpAvailable){
+    if (phoneHelpAvailable) {
         let randomIndex = Math.floor(Math.random() * 4)
         let randomOption = optionsContainers[randomIndex]
         optionsContainers.forEach((el, index) => {
-            if ( el === randomOption) {
+            if (el === randomOption) {
                 el.classList.add("clue")
             }
         })
@@ -210,6 +193,7 @@ function handlePhoneHelpClick() {
         phoneHelp.classList.add("used")
     }
 }
+
 function putQuestion(round) {
     optionsContainers.forEach((el, i) => {
         el.innerHTML = roundInfo[round].options[i]
@@ -223,8 +207,25 @@ function definePrizeOnBoard(round) {
     prizes[round].classList.add('round')
 
 }
+
 function setPopUpTitleAndText(title, text) {
     popUpTitle.innerText = title
     popUpText.innerHTML = text
 }
-setPopUpTitleAndText(`Раунд ${roundNum}`,"Виберіть правильну відповідь")
+
+setPopUpTitleAndText(`Раунд ${roundNum}`, "Виберіть правильну відповідь")
+
+putQuestion(roundNum - 1)
+
+optionsContainer.addEventListener("click", (e) => {
+        round(e.target)
+    }
+)
+phoneHelp.addEventListener("click", (e) => {
+    handlePhoneHelpClick();
+
+})
+fiftyHelp.addEventListener("click", () => {
+    handleFiftyHelpClick(roundNum);
+})
+

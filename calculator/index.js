@@ -3,7 +3,6 @@ let buttonsContainer = document.querySelector('.buttons-wrapper')
 let historyDisplay = document.querySelector('.history-text')
 let sign = '';
 let canPutSign = true;
-let strToShowOnScreenBeforeCount = ''
 let firstNumber = ''
 let secondNumber = ''
 
@@ -14,8 +13,6 @@ function count(a, b) {
     if (sign === "/") return a / b
     if (sign === "^") return Math.pow(a, b)
     if (sign === "%") return a / 100 * b
-
-
     return 0
 }
 
@@ -47,21 +44,29 @@ function clickHandler(e) {
         if(resultWindow.innerHTML === "0") return;
     }
     if (e.target.classList.contains('number')) {
-        if (sign) {
+        if (resultWindow.innerHTML.length > 15) return;
+
+        if(resultWindow.innerHTML === '-'){
+            console.log(2)
+            resultWindow.innerHTML = resultWindow.innerHTML + e.target.innerHTML;
+
+        }  if (sign) {
+            console.log(1)
             secondNumber = secondNumber + e.target.innerHTML
             console.log(secondNumber)
             resultWindow.innerHTML = secondNumber
-        } else {
+        }
+            else {
             resultWindow.innerHTML = resultWindow.innerHTML + e.target.innerHTML;
-
         }
 
     }
     if (e.target.classList.contains('sign')) {
+        sign = e.target.innerHTML
+
         if (secondNumber) {
             let res = count(firstNumber, secondNumber)
             historyDisplay.innerHTML = res + e.target.innerHTML
-            sign = e.target.innerHTML
             resultWindow.innerHTML = sign
             firstNumber = res
             secondNumber = ""
@@ -71,13 +76,13 @@ function clickHandler(e) {
 
         } else if (resultWindow.innerHTML) {
             firstNumber = resultWindow.innerHTML
-            sign = e.target.innerHTML
             console.log('1st' + firstNumber)
             console.log('2nd' + secondNumber)
-
             historyDisplay.innerHTML = resultWindow.innerHTML + e.target.innerHTML
             resultWindow.innerHTML = sign;
 
+        } else if(e.target.innerHTML === "-"){
+            resultWindow.innerHTML = sign;
         }
 
 

@@ -1,7 +1,8 @@
-body {
-    padding: 0;
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
+body{
     margin: 0;
     background: url("https://mobimg.b-cdn.net/v3/fetch/fc/fc813e57424d1ad9576f9066812f670f.jpeg") no-repeat center center fixed;
+    font-family: 'Lato', sans-serif;
 }
 
 * {
@@ -9,6 +10,10 @@ body {
 }
 .container {
     display: flex;
+}
+ul{
+    list-style: none;
+    padding: 0;
 }
 .pop_up {
     width: 90%;
@@ -77,12 +82,12 @@ body {
     outline: 1px gold solid;
     box-sizing: border-box;
 }
-ol{
+ul{
     display: flex;
     flex-direction: column-reverse;
+   align-items: center;
 }
 .points_section{
-    padding-left: 30px;
     padding-top: 50px;
     width: 30%;
 }
@@ -121,30 +126,29 @@ ol{
 .help_item:hover{
     scale: 1.1;
 }
+
 .round{
+    text-align: center;
     border: 1px solid gold;
     background-color: gold;
     width: fit-content;
     border-radius: 15px;
-    padding: 8px 3%;
+    padding: 8px 10px ;
     color: black;
     font-weight: bold;
     position: relative;
-    text-decoration: underline;
+}
+ul{
+    padding-top: 30px;
+    margin: 0 auto;
+    width: 80%;
+
+}
+li{
+    margin-top: 9px;
+
 }
 
-.round:before{
-    content: "";
-    position:absolute;
-    top: -1px;
-    left:-58%;
-    background-color: gold;
-    z-index:-1;
-    display:block;
-    width:100%;
-    height:50px;
-    border-radius:15px;
-}
 .correct{
     background-color: #0c430c;
 }
@@ -162,4 +166,9 @@ ol{
     font-size: 48px;
     font-weight: bold;
     color: gold;
+}
+.wrong{
+    background: #511111;
+    border: 1px solid black;
+
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <div class="generator_wrap">
+        <div class="flex_wrap">
+            <div class="flex_item">
+                <h2 class="title">
+                    Діапазон
+                </h2>
+                <label for="min">Від</label>
+                <input type="number" id="min" value="1" class="input">
+                <label for="max">До</label>
+                <input type="number" id="max" value="5" class="input">
+            </div>
+            <div class="flex_item">
+                <h2 class="title">
+                    Параметри
+                </h2>
+                <label for="amount">Кількість</label>
+                <input type="number" id="amount" value="3" class="input">
+                <label for="repeat">Повторяти</label>
+                <input type="checkbox" name="can_repeat" id="repeat" class="input">
+
+            </div>
+        </div>
+        <button class="generate">згенерувати</button>
+
+    </div>
+    <h2 class="result_title">Результат</h2>
+    <div class="result_wrap">1 2 3</div>
+
+</div>
+<script src="main.js"></script>
+</body>
+</html>

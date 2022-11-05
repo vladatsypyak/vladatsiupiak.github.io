@@ -2,7 +2,6 @@ let resultWindow = document.querySelector('.result')
 let buttonsContainer = document.querySelector('.buttons-wrapper')
 let historyDisplay = document.querySelector('.history-text')
 let sign = '';
-let canPutSign = true;
 let firstNumber = ''
 let secondNumber = ''
 
@@ -21,6 +20,7 @@ function clearAll() {
     secondNumber = ""
     historyDisplay.innerHTML = ""
     resultWindow.innerHTML = '';
+    sign = ""
 }
 
 function deleteOneSign() {
@@ -33,36 +33,34 @@ function checkIfPointCanBePut(str) {
 }
 
 
-
 function clickHandler(e) {
-    if (e.target.classList.contains('dot')) {
-        if (!checkIfPointCanBePut(resultWindow.innerHTML)) {
-            return
-        }
+    if (e.target.classList.contains('dot') && !checkIfPointCanBePut(resultWindow.innerHTML)) {
+        return;
     }
-    if(e.target.innerHTML === '0'){
-        if(resultWindow.innerHTML === "0") return;
+    if (e.target.innerHTML === '0' && resultWindow.innerHTML === "0") {
+        return;
     }
     if (e.target.classList.contains('number')) {
+        let userNum = e.target.innerHTML
         if (resultWindow.innerHTML.length > 15) return;
 
-        if(resultWindow.innerHTML === '-'){
-            console.log(2)
-            resultWindow.innerHTML = resultWindow.innerHTML + e.target.innerHTML;
+        if (sign) {
+            if (resultWindow.innerHTML === '-' && !firstNumber) {
+                resultWindow.innerHTML = resultWindow.innerHTML + userNum;
 
-        }  if (sign) {
-            console.log(1)
-            secondNumber = secondNumber + e.target.innerHTML
-            console.log(secondNumber)
-            resultWindow.innerHTML = secondNumber
-        }
-            else {
-            resultWindow.innerHTML = resultWindow.innerHTML + e.target.innerHTML;
-        }
+            } else {
+                secondNumber = secondNumber + userNum
+                resultWindow.innerHTML = secondNumber
+            }
 
+        } else {
+
+            resultWindow.innerHTML = resultWindow.innerHTML + userNum;
+        }
     }
     if (e.target.classList.contains('sign')) {
         sign = e.target.innerHTML
+
 
         if (secondNumber) {
             let res = count(firstNumber, secondNumber)
@@ -70,26 +68,18 @@ function clickHandler(e) {
             resultWindow.innerHTML = sign
             firstNumber = res
             secondNumber = ""
-            console.log('1st' + firstNumber)
-            console.log('2st' + secondNumber)
-
-
         } else if (resultWindow.innerHTML) {
             firstNumber = resultWindow.innerHTML
-            console.log('1st' + firstNumber)
-            console.log('2nd' + secondNumber)
             historyDisplay.innerHTML = resultWindow.innerHTML + e.target.innerHTML
             resultWindow.innerHTML = sign;
 
-        } else if(e.target.innerHTML === "-"){
+        } else if (e.target.innerHTML === "-") {
             resultWindow.innerHTML = sign;
         }
 
 
     }
     if (e.target.classList.contains('equal')) {
-        console.log('first' + firstNumber)
-        console.log('second' + secondNumber)
         let res = count(firstNumber, secondNumber)
         resultWindow.innerHTML = res
         firstNumber = res

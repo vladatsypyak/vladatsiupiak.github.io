@@ -11,31 +11,32 @@ let phoneHelpAvailable = true
 let prize = 0
 let roundNum = 1
 let gameOver = false
+
 let roundInfo = [
     {
-        question: "Найменша країна світу",
-        options: ["Ватикан", "Люксембург", "ЄВізантія", "Італія"],
-        correct: "Ватикан",
+        question: "Хто живе в ананасі на дні?",
+        options: ["Губка Боб Квадратні Штани", "Свинка Пеппа", "Наруто", "Шрек"],
+        correct: "Губка Боб Квадратні Штани",
         indexOfCorrect: 0
     },
     {
-        question: "Найбагатша країна світу",
-        options: ["Люксембург", "Китай", "Великобританія", "Швейцарія"],
-        correct: "Люксембург",
+        question: "Що треба робити, коли бачиш зеленого чоловічка",
+        options: ["Переходити дорогу", "Похреститись", "Викликати мисливців на привидів", "Звернутись до лікаря"],
+        correct: "Переходити дорогу",
         indexOfCorrect: 0
 
     },
     {
-        question: "Перший фільм",
-        options: ["Сінемаколор", "Історія банди Неда Келлі", "Прибуття поїзда на вокзал Ла-Сьота", "Швейцарія"],
-        correct: "Прибуття поїзда на вокзал Ла-Сьота",
+        question: "Найпопулярніша мама 2022",
+        options: ["Ніна", "Меланія", "Стефанія", "Соломія"],
+        correct: "Стефанія",
         indexOfCorrect: 2
 
     },
     {
-        question: "Висота Ейфелевої вежі",
-        options: ["302м", "425м", "265м", "330м"],
-        correct: "330м",
+        question: "Найулюбленіша рослина українців",
+        options: ["Чорнобривець", "Кукурудза", "Фіалка", "Бавовна"],
+        correct: "Бавовна",
         indexOfCorrect: 3
 
     },
@@ -54,7 +55,7 @@ let roundInfo = [
     },
     {
         question: "Найбагатша країна світу",
-        options: ["Люксембург", "Китай", "Великобританія", "Швейцарія"],
+        options: ["Люксембург", "Китай", "Великобританія", "Індія"],
         correct: "Люксембург",
         indexOfCorrect: 0
 
@@ -87,7 +88,7 @@ let roundInfo = [
     },
     {
         question: "Найбагатша країна світу",
-        options: ["Люксембург", "Китай", "Великобританія", "Швейцарія"],
+        options: ["Люксембург", "Китай", "Великобританія", "Індія"],
         correct: "Люксембург",
         indexOfCorrect: 0
 
@@ -138,8 +139,7 @@ function handleFiftyHelpClick(roundNum) {
 
 
 function round(userAnswer) {
-    console.log(gameOver)
-    if(!gameOver){
+    if (!gameOver) {
         let answer
         putQuestion(roundNum - 1)
 
@@ -147,9 +147,9 @@ function round(userAnswer) {
             answer = userAnswer.innerHTML
         }
         let quiz = roundInfo[roundNum - 1]
-        if (roundNum === 5)  prize = 1000
+        if (roundNum === 5) prize = 1000
 
-        if (roundNum === 10)  prize = 32000
+        if (roundNum === 10) prize = 32000
 
         if (answer === quiz.correct) {
             setPopUpTitleAndText(`Раунд ${roundNum + 1}`, "Відповідь правильна")
@@ -157,8 +157,9 @@ function round(userAnswer) {
             if (roundNum === 15) {
                 prize = '1 000 000'
                 gameOver = true
-                setPopUpTitleAndText('', `Це був останній раунд. <p> Вітаємо ви виграли <span class="million">${prize}</span> грн!!!</p>
+                setPopUpTitleAndText('', `Це був останній раунд. <p> Вітаємо! Ви виграли <span class="million blink">${prize}</span> грн!!!</p>
                  `)
+                blinker(document.querySelector(".blink"))
             } else {
                 roundNum += 1
                 definePrizeOnBoard(roundNum - 1)
@@ -175,9 +176,6 @@ function round(userAnswer) {
         }
     }
 }
-
-
-
 
 function handlePhoneHelpClick() {
     if (phoneHelpAvailable) {
@@ -229,3 +227,7 @@ fiftyHelp.addEventListener("click", () => {
     handleFiftyHelpClick(roundNum);
 })
 
+function blinker(el) {
+    el.style.color = (el.style.color === 'gold' ? 'white' : 'gold');
+    setTimeout('blinker(document.querySelector(".blink"))', 200);
+}

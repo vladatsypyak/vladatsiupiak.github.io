@@ -13,7 +13,9 @@ p, h1, h2 {
 label, input {
     display: block;
 }
-
+.container{
+    padding-top: 50px;
+}
 input {
     padding: 8px;
     border-radius: 10px;
@@ -44,20 +46,22 @@ input {
 #repeat {
     align-self: flex-start;
 }
+.btn{
+    border-radius: 10px;
+    border: none;
+    background-color: #22b9da;
+    color: white;
+    font-weight: bold;
+}
 
 .generate {
     width: 100%;
     padding: 20px;
-    border-radius: 10px;
-    border: none;
     text-transform: uppercase;
-    background-color: #22b9da;
-    color: white;
-    font-weight: bold;
     box-shadow: 0 5px 15px #b1b4d9;
 
 }
-.generate:hover{
+.btn:hover{
     cursor: pointer;
     opacity: 0.8;
 }
@@ -78,6 +82,26 @@ input {
     border-radius: 15px;
     box-shadow: 0 5px 15px #87cee3;
     word-spacing: 1.3em;
+    position: relative;
 
+}
+.result{
 
+}
+.color-change-2x {
+    animation: color-change-2x 10s linear infinite alternate both;
+}
+@keyframes color-change-2x {
+    0% {
+        background: #19dcea;
+    }
+    100% {
+        background: #b22cff;
+    }
+}
+.js-copy-btn{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
 }

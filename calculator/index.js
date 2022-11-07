@@ -6,13 +6,18 @@ let firstNumber = ''
 let secondNumber = ''
 
 function count(a, b) {
-    if (sign === "-") return a - b
-    if (sign === "+") return +a + +b
-    if (sign === "*") return a * b
-    if (sign === "/") return a / b
-    if (sign === "^") return Math.pow(a, b)
-    if (sign === "%") return a / 100 * b
-    return 0
+    let result
+    console.log(a)
+    console.log(b)
+    console.log(sign)
+    if (sign === "-") result = a - b
+    if (sign === "+") result = +a + +b
+    if (sign === "*") result = a * b
+    if (sign === "/") result = a / b
+    if (sign === "^") result = Math.pow(a, b)
+    if (sign === "%") result = a / 100 * b
+
+    return +result.toFixed(4)
 }
 
 function clearAll() {
@@ -46,35 +51,40 @@ function clickHandler(e) {
 
         if (sign) {
             if (resultWindow.innerHTML === '-' && !firstNumber) {
+                console.log("s1")
                 resultWindow.innerHTML = resultWindow.innerHTML + userNum;
 
             } else {
+                console.log("s2")
+
                 secondNumber = secondNumber + userNum
                 resultWindow.innerHTML = secondNumber
             }
 
         } else {
+            console.log("s3")
 
             resultWindow.innerHTML = resultWindow.innerHTML + userNum;
         }
     }
     if (e.target.classList.contains('sign')) {
-        sign = e.target.innerHTML
-
+    let userSign = e.target.innerHTML
 
         if (secondNumber) {
             let res = count(firstNumber, secondNumber)
-            historyDisplay.innerHTML = res + e.target.innerHTML
-            resultWindow.innerHTML = sign
+            sign = userSign
+            historyDisplay.innerHTML = res + userSign
+            resultWindow.innerHTML = userSign
             firstNumber = res
             secondNumber = ""
         } else if (resultWindow.innerHTML) {
             firstNumber = resultWindow.innerHTML
             historyDisplay.innerHTML = resultWindow.innerHTML + e.target.innerHTML
-            resultWindow.innerHTML = sign;
+            sign = userSign
+            resultWindow.innerHTML = userSign;
 
         } else if (e.target.innerHTML === "-") {
-            resultWindow.innerHTML = sign;
+            resultWindow.innerHTML = userSign;
         }
 
 
